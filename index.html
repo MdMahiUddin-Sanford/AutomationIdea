@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sanford Health | Automation Ideas</title>
+<style>
+  :root{
+    --blue:#0b3a6f; --blue2:#1b6ec2; --teal:#00a3a1; --gold:#f2a900;
+    --bg:#f4f7fb; --ink:#1c2a3a; --muted:#5d6b7c; --card:#fff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  a{color:var(--blue2)}
+  header{background:#fff;border-bottom:3px solid var(--teal);position:sticky;top:0;z-index:10}
+  .bar{max-width:1100px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:14px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--blue)}
+  .brand .name{font-weight:600;font-size:1.1rem;padding-left:14px;border-left:2px solid #d5dde8;color:var(--blue)}
+  .brand img{display:block}
+  nav{margin-left:auto;display:flex;gap:18px;font-size:.92rem}
+  nav a{text-decoration:none;color:var(--ink)} nav a:hover{color:var(--blue2)}
+  .hero{background:linear-gradient(120deg,var(--blue) 0%,var(--blue2) 60%,var(--teal) 100%);color:#fff;padding:32px 20px 56px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-80px;top:-80px;width:380px;height:380px;border-radius:50%;background:rgba(255,255,255,.08)}
+  .wrap{max-width:1100px;margin:auto;position:relative;z-index:1}
+  .eyebrow{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-weight:400;font-size:1.35rem;letter-spacing:.5px;color:#fff;margin-bottom:12px;display:inline-block;padding-bottom:6px;border-bottom:2px solid var(--gold)}
+  .eyebrow em{color:var(--gold);font-style:italic}
+  .hero h1{font-size:2.2rem;margin:0 0 8px;line-height:1.15}
+    .hero p{max-width:640px;font-size:1.05rem;opacity:.95;margin:0 0 6px}
+  .btn{display:inline-block;background:var(--gold);color:#1c1c1c;font-weight:700;padding:13px 26px;border-radius:999px;text-decoration:none;border:0;cursor:pointer;font-size:1rem;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+  .btn:hover{filter:brightness(1.07)}
+  .btn.alt{background:transparent;color:#fff;border:2px solid #fff;box-shadow:none;margin-left:10px}
+  section{max-width:1100px;margin:auto;padding:48px 20px}
+  h2{color:var(--blue);margin:0 0 6px;font-size:1.7rem}
+  .sub{color:var(--muted);margin:0 0 26px}
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .card{background:var(--card);border-radius:14px;padding:22px;box-shadow:0 2px 10px rgba(11,58,111,.08);border-top:4px solid var(--teal)}
+  .card .ic{font-size:1.9rem}
+  .card h3{margin:8px 0 6px;color:var(--blue);font-size:1.1rem}
+  .card p{margin:0;color:var(--muted);font-size:.95rem}
+  .pull{margin-top:-34px;position:relative;z-index:2}
+  .steps{counter-reset:s}
+  .steps .card{border-top-color:var(--gold);position:relative;padding-top:34px}
+  .steps .card::before{counter-increment:s;content:counter(s);position:absolute;top:-16px;left:20px;background:var(--blue);color:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700}
+  .panel{background:#fff;border-radius:16px;padding:26px;box-shadow:0 2px 12px rgba(11,58,111,.1)}
+  .calc{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  label{font-weight:600;font-size:.92rem;display:block;margin-bottom:4px}
+  select,input[type=number]{width:100%;padding:10px;border:1px solid #c7d2df;border-radius:8px;font-size:.95rem;background:#fff}
+  .result{margin-top:22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;background:var(--bg);border-radius:12px;padding:18px}
+  .score{font-size:2.4rem;font-weight:800;color:var(--blue);min-width:90px}
+  .rl{color:var(--muted);font-size:.82rem}
+  .narrow{max-width:760px;margin:auto;padding:40px 44px}
+  .group{margin:0 0 44px}
+  .group h3,.rh{margin:0 0 22px;color:var(--blue);font-size:1.2rem;display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:2px solid #e3eaf3}
+  .num{display:inline-grid;place-items:center;min-width:32px;height:32px;border-radius:50%;background:var(--teal);color:#fff;font-size:.9rem;font-weight:700;padding:0 6px}
+  .field,.q{margin-bottom:26px}
+  .field label,.q label{font-size:1rem;margin-bottom:8px}
+  .field b{color:#c0392b}
+  .field input,.field textarea,.q select,.q input{width:100%;padding:13px 14px;border:1px solid #c7d2df;border-radius:10px;font:inherit;background:#fff}
+  .field input:focus,.field textarea:focus,.q select:focus,.q input:focus{outline:3px solid rgba(27,110,194,.25);border-color:var(--blue2)}
+  .info{margin-left:8px;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--blue2);background:#fff;color:var(--blue2);font:italic 700 .8rem Georgia,serif;cursor:pointer;vertical-align:middle;padding:0}
+  .info:hover{background:var(--blue2);color:#fff}
+  .modal{position:fixed;inset:0;background:rgba(10,30,60,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+  .modal.open{display:flex}
+  .modal .box{background:#fff;border-radius:14px;max-width:560px;width:100%;max-height:80vh;overflow:auto;padding:26px 28px;box-shadow:0 10px 40px rgba(0,0,0,.3)}
+  .modal h4{margin:0 0 12px;color:var(--blue);font-size:1.05rem}
+  .modal p{margin:0 0 18px;white-space:pre-line;color:var(--ink);font-size:.95rem}
+  .q small{display:block;color:var(--muted);font-weight:400;font-size:.85rem;margin-top:2px}
+  .hint{color:var(--muted);font-size:.85rem}
+  .result{gap:28px 40px;padding:26px}
+  .result>div{flex:1 1 200px}
+  .verdict{margin-top:22px;padding:18px 22px;border-radius:12px;font-weight:600;line-height:1.7;background:#eef3fa;border-left:5px solid var(--blue2)}
+  .verdict.bad{background:#fdecea;border-color:#c0392b}.verdict.ok{background:#e7f6ee;border-color:#1a9a55}.verdict.warn{background:#fff6dd;border-color:var(--gold)}
+  .contact{margin-top:26px;padding:22px;border-radius:12px;background:#e8f6f6;border-left:5px solid var(--teal)}
+  .contact .btn{box-shadow:none;margin-top:6px}
+  @media(max-width:700px){.narrow{padding:26px 18px}}
+  .tag{display:inline-block;padding:4px 12px;border-radius:999px;font-weight:700;font-size:.85rem;color:#fff;background:var(--muted)}
+  .formbox{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(11,58,111,.1)}
+  .formbox iframe{width:100%;height:900px;border:0;display:block}
+  .setup{padding:30px;text-align:center;color:var(--muted)}
+  .privacy{background:#e8f6f6;border-left:5px solid var(--teal);padding:16px 20px;border-radius:8px;font-size:.93rem}
+  footer{background:var(--blue);color:#cfe0f3;text-align:center;padding:10px 20px;font-size:.8rem;line-height:1.4;position:fixed;bottom:0;left:0;right:0;z-index:10;box-shadow:0 -2px 8px rgba(0,0,0,.15)}
+  body{padding-bottom:72px}
+  @media(max-width:700px){.hero h1{font-size:2rem} nav{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="brand" href="#top">
+      <img src="sanford-health-logo.png" height="44" alt="Sanford Health">
+    </a>
+    <nav><a href="#how">How it works</a><a href="#assess">Quick assessment</a><a href="#privacy">Privacy</a></nav>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow">Here for all. <em>Here for good.</em></div>
+    <h1>Got a task that eats your time?<br>Let's automate it.</h1>
+    <p>Tell us about repetitive, manual or error-prone work in your day. Your ideas help us give more time back to patient care and the teams that support it.</p>
+    <p style="margin-top:16px"><a class="btn" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=E0iiAg1kzUa1g5SfBBNysOyYEbGOhHpDtVrcLVqISQlUQlBHVjRRRjkwSEFETzdHUkpYQlo1QUFHQy4u" target="_blank" rel="noopener">Share an idea</a></p>
+  </div>
+</div>
+
+<section class="pull">
+  <div class="grid">
+    <div class="card"><div class="ic">⏱️</div><h3>Save time</h3><p>Hand repetitive tasks to software so staff focus on people.</p></div>
+    <div class="card"><div class="ic">✅</div><h3>Reduce errors</h3><p>Consistent, rule-based processing improves accuracy and compliance.</p></div>
+    <div class="card"><div class="ic">💙</div><h3>Better care</h3><p>Less administrative burden means more time for patients and colleagues.</p></div>
+    <div class="card"><div class="ic">💡</div><h3>Every idea counts</h3><p>No idea is too small. Simple ideas often deliver the biggest wins.</p></div>
+  </div>
+</section>
+
+<section id="how">
+  <h2>How it works</h2>
+  <p class="sub">Four simple steps from idea to assessment.</p>
+  <div class="grid steps">
+    <div class="card"><h3>Describe it</h3><p>Tell us what the task is and who does it today.</p></div>
+    <div class="card"><h3>Size it</h3><p>Estimate how often it runs and how long it takes.</p></div>
+    <div class="card"><h3>Assess it</h3><p>We review feasibility, risk, data sensitivity and value.</p></div>
+    <div class="card"><h3>Hear back</h3><p>You'll be contacted about next steps if it moves forward.</p></div>
+  </div>
+</section>
+
+<section id="assess">
+  <h2 id="assessToggle" role="button" tabindex="0" aria-expanded="false" style="cursor:pointer;text-align:center">Quick self-assessment</h2>
+  <p class="sub" style="text-align:center">Click to start. A quick, private estimate in your browser.</p>
+  <div class="panel narrow" id="assessPanel" style="display:none">
+    <div class="group">
+      <div class="field"><label for="c_proc">Process name <b>*</b></label><input id="c_proc" type="text" placeholder="e.g. Weekly staff onboarding report"></div>
+      <p class="hint">Do not enter patient information.</p>
+    </div>
+    <div id="calc"></div>
+    <p style="text-align:center;margin:10px 0 0"><button class="btn" id="resultsBtn" type="button">Get your results</button> <span id="resMsg" class="hint"></span></p>
+    <div id="resultsBox" style="display:none;margin-top:36px">
+    <h3 class="rh"><span class="num">✓</span>Your results</h3>
+    <p style="margin:0 0 18px;font-size:1.05rem">Process: <strong id="resProc"></strong></p>
+    <div class="result">
+      <div><div class="rl">Ease of implementation</div><div class="score" id="effortPct">–</div><span class="tag" id="effortTag">—</span></div>
+      <div><div class="rl">Benefit / suitability</div><div class="score" id="benefitPct">–</div><span class="tag" id="benefitTag">—</span></div>
+      <div><div class="rl">Bandwidth freed (hours/year)</div><div class="score" id="hours">–</div><div class="rl" id="fte"></div></div>
+      <div><div class="rl">Error reduction</div><div class="score" id="errRed">–</div></div>
+    </div>
+    <div class="verdict" id="verdictBox"></div>
+    <div class="contact">
+      <h3 style="margin:0 0 6px;color:var(--blue)">Would you like to connect with the automation team?</h3>
+      <div id="askBtns"><button class="btn" id="yesBtn" type="button">Yes, connect me</button> <button class="btn" id="noBtn" type="button" style="background:#e3eaf3">No, thanks</button></div>
+      <p id="noMsg" class="hint" style="display:none">No problem. You can come back any time.</p>
+    </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section id="privacy">
+  <div class="privacy">
+    <strong>🔒 Your privacy.</strong> Please do not include patient names, MRNs or other PHI.
+  </div>
+</section>
+
+<footer><div style="font-weight:700;letter-spacing:1px;color:#fff;margin-bottom:2px">Improving the Human Condition</div>© <span id="yr"></span> Sanford Health · Internal automation ideas program</footer>
+
+<div class="modal" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="infoTitle"><div class="box"><h4 id="infoTitle"></h4><p id="infoText"></p><button class="btn" id="infoClose" type="button" style="box-shadow:none">Close</button></div></div>
+
+<script>
+  const openInfo = (t, h) => { $("infoTitle").textContent = t; $("infoText").textContent = h; $("infoModal").classList.add("open"); $("infoClose").focus(); };
+  const closeInfo = () => $("infoModal").classList.remove("open");
+  document.addEventListener("DOMContentLoaded", () => {
+    $("infoClose").addEventListener("click", closeInfo);
+    $("infoModal").addEventListener("click", e => { if (e.target.id === "infoModal") closeInfo(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closeInfo(); });
+  });
+</script>
+<script>
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  const $ = id => document.getElementById(id);
+  // Scoring tables come from "Process Assessment Tool - Introduction to Automation.xlsx" (Scorecard sheet).
+  const SC = {
+    rule: [["Exclusively rule based","ok"],["Mostly rule based","ok"],["Some level of subjectivity involved","ok"],["Mostly subjective","low"],["Exclusively subjective","low"]],
+    input: [["Not digital and unstructured","low"],["Non digital and structured","digitize"],["Digital and unstructured","ok"],["Digital and structured","ok"]],
+    change: [["No change expected",0],["Very small change",0.2],["Some change",0.4],["Medium change",0.8],["Significant change","postpone"]],
+    freq: [["Daily",260],["Weekly",52],["Bi-weekly",26],["Monthly",12],["Quarterly",4],["Annually",1]],
+    peaks: [["Regular (e.g. month closing), lasting days or weeks and raising team load by >20%",1],["Rare but predictable (e.g. year-end closing), raising team load by >20%",2],["Rare event, hard to predict, short duration",3],["The process does not have peaks",null]],
+    steps: [["10 steps or fewer",0.1],["10-15 steps",0.2],["15-25 steps",0.4],["25-40 steps",0.6],["More than 40 steps",1]],
+    decisions: [["Linear, no decisions to be taken",0.1],["Simple decisions (yes/no type)",0.2],["Complex decisions",0.7]],
+    apps: [["1 application",0.1],["2-3 applications",0.3],["4-5 applications",0.6],["More than 5 applications",1]],
+    yesno: [["No",1],["Yes",null]]
+  };
+  const QS = [
+    {g:"Eligibility", id:"rule", t:"Is the process rule based or judgmental?", o:"rule"},
+    {g:"Eligibility", id:"input", t:"What do most of your data inputs look like?", o:"input", h:"Digital: any data that can be stored on a machine [server, laptop, IOT devices].\n\nStructured data: has a predictable format, exists in fixed fields (e.g. an xls cell or a field in a form) and is easily detectable via search algorithms. Think about your structured data as: excels, tables with fixed structure, databases where you can easily extract your information through a search function.\n\nUnstructured data: may have its own internal structure, but this is not highly predictable. Examples: web logs, multimedia content, customer service interactions and social media data."},
+    {g:"Timing", id:"pstab", t:"How will your process change in the next 6 months?", o:"change", h:"Think about changes of the following type:\n- legislative changes that are upcoming and could change the rules/logic of the process;\n- organizational changes such as re-distributing bits of the processes between different roles/departments;\n- industry shifts that could change the business model and hence the rules of the process."},
+    {g:"Timing", id:"astab", t:"How will your applications change in the next 6 months?", o:"change", h:"Think about not only applications but also interfaces, menus in apps and reports."},
+    {g:"Benefits", id:"ppl", t:"How many employees are needed to perform the process?", n:1, d:1, opt:true},
+    {g:"Benefits", id:"freq", t:"How often is the process run?", o:"freq"},
+    {g:"Benefits", id:"vol", t:"Volume: how many times is it run per selected frequency?", n:1, d:10,     h:"E.g. if the process happens weekly, we need the volume that happens on average during a week."},
+        {g:"Benefits", id:"aht", t:"Average handling time per run (minutes)", n:1, d:30, h:"Please quantify the average handling time in minutes, e.g. if 4 hours then insert 240."},
+    {g:"Benefits", id:"errs", t:"Average number of human errors (optional)", n:0, d:0, opt:true},
+    {g:"Benefits", id:"peaks", t:"How would you characterize the peaks of the process?", o:"peaks"},
+    {g:"Process complexity", id:"steps", t:"How many steps does the process have?", o:"steps"},
+    {g:"Process complexity", id:"dec", t:"How difficult are the decisions you must take?", o:"decisions"},
+    {g:"Process complexity", id:"exc", t:"What % of cases can you NOT complete (needs someone else's input or no clear rule)?", n:0, d:10, max:100, pct:true},
+    {g:"Process complexity", id:"apps", t:"How many applications do you use?", o:"apps"},
+    {g:"Process complexity", id:"vm", t:"Are any applications accessed via virtual machines (thin client)?", o:"yesno"},
+    {g:"Input data", id:"dig", t:"What % of your input data is digital?", n:0, d:100, max:100, pct:true},
+    {g:"Input data", id:"scan", t:"Is any of your digital input scanned (needs OCR)?", o:"yesno"},
+    {g:"Input data", id:"str", t:"What % of your input data is structured?", n:0, d:100, max:100, pct:true, h:"Structured data: has a predictable format, exists in fixed fields (e.g. an xls cell or a field in a form) and is easily detectable via search algorithms. Think about your structured data as: excels, tables with fixed structure, databases where you can easily extract your information through a search function.\n\nExamples: if your inputs consist of 5 excel files/or ERP reports then 100% of your data is structured, whereas if your input consists of 4 excel files/ERP reports and 1 e-mail text then 80% of your data is structured."}
+  ];
+  const el = (tag, attrs={}, html="") => Object.assign(document.createElement(tag), attrs, {innerHTML: html});
+  const calcBox = $("calc");
+  let curGroup = "", gdiv, gi = 0;
+  QS.forEach(q => {
+    if (q.g !== curGroup) { curGroup = q.g; gi++; gdiv = el("div",{className:"group"},`<h3><span class="num">${gi}</span>${q.g}</h3>`); calcBox.appendChild(gdiv); }
+    const w = el("div",{className:"q"});
+    const lab = el("label",{htmlFor:"q_"+q.id}); lab.textContent = q.t; w.appendChild(lab);
+    if (q.h) { const i = el("button",{type:"button",className:"info",title:"More details"},"i"); i.setAttribute("aria-label","More details: "+q.t); i.addEventListener("click", () => openInfo(q.t, q.h)); lab.appendChild(i); }
+    const inp = q.o
+      ? el("select",{id:"q_"+q.id}, SC[q.o].map((o,i)=>`<option value="${i}">${o[0]}</option>`).join(""))
+      : el("input",{id:"q_"+q.id,type:"number",min:q.n,value:q.d, ...(q.max?{max:q.max}:{})});
+    inp.addEventListener("input", calc); w.appendChild(inp); gdiv.appendChild(w);
+  });
+
+  const pct = x => Math.round(x*100) + "%";
+  const tag = (id, text, color) => { const t=$(id); t.textContent=text; t.style.background=color; };
+  function calc() {
+    const sel = (id,k) => SC[k][+$("q_"+id).value][1];
+    const num = (id,min=0,max=1e9) => Math.min(Math.max(+$("q_"+id).value||0,min),max);
+    const flags = [];
+    const rule = sel("rule","rule"), input = sel("input","input");
+    const ps = sel("pstab","change"), as = sel("astab","change");
+    if (rule === "low") flags.push(["bad","Low feasibility: a mostly subjective process is hard to automate."]);
+    if (input === "low") flags.push(["bad","Low feasibility: non-digital, unstructured input."]);
+    if (input === "digitize") flags.push(["warn","Digitize the input data first, then revisit."]);
+    if (ps === "postpone" || as === "postpone") flags.push(["warn","Postpone: expect significant process or application change in the next 6 months."]);
+
+    const stability = Math.max(ps==="postpone"?0:ps, as==="postpone"?0:as);
+    const apps = sel("apps","apps"), steps = sel("steps","steps"), logic = sel("dec","decisions");
+    const thin = sel("vm","yesno") ?? 1.6, ocr = sel("scan","yesno") ?? 1.2;
+    const inputPenalty = (()=>{ const s=num("str",0,100); return s>=80?0:s>=60?0.4:s>=40?0.7:1; })();
+    const effort = Math.min(1, (0.1*stability + 0.1*apps + 0.1*steps + 0.3*logic + 0.4*inputPenalty) * thin * ocr);
+    const digital = num("dig",0,100)/100, exceptions = num("exc",0,100)/100;
+    const benefit = Math.max(0, digital*(1 - exceptions - 0.5*inputPenalty - 0.1*logic));
+    const f = SC.freq[+$("q_freq").value][1];
+    const fte = f * num("vol") * num("aht") / 60 / 8 / 260;
+    const hours = benefit * fte * 260 * 8;
+
+    $("effortPct").textContent = pct(effort);
+    tag("effortTag", effort<=0.35?"Low effort":effort<=0.65?"Medium effort":"High effort", effort<=0.35?"#1a9a55":effort<=0.65?"#f2a900":"#c0392b");
+    $("benefitPct").textContent = pct(benefit);
+    tag("benefitTag", benefit<=0.10?"Low benefit":benefit<=0.35?"Medium-low benefit":benefit<0.65?"Medium-high benefit":"High benefit", benefit<=0.10?"#c0392b":benefit<=0.35?"#f2a900":"#1a9a55");
+    $("hours").textContent = Math.round(hours).toLocaleString();
+    $("fte").textContent = "≈ " + fte.toFixed(2) + " FTE in the process";
+    $("errRed").textContent = pct(benefit);
+
+    const diy = input==="ok" && (ps===0||ps===0.2) && num("ppl")===1 && (steps<=0.2) && (logic<=0.2) && sel("vm","yesno")===1 && num("dig",0,100)===100 && sel("scan","yesno")===1;
+    const bad = flags.some(x=>x[0]==="bad");
+    const box = $("verdictBox");
+    const msgs = flags.map(x=>x[1]);
+    msgs.push(diy ? "You may be able to automate this process yourself." : "Automating this process needs professional expertise. Submit this idea to the Center of Excellence.");
+    box.className = "verdict " + (bad ? "bad" : flags.length ? "warn" : diy ? "ok" : "");
+    box.innerHTML = msgs.join("<br>");
+  }
+  calc();
+
+  function setAssess(open) {
+    $("assessPanel").style.display = open ? "block" : "none";
+    $("assessToggle").setAttribute("aria-expanded", open);
+  }
+  const toggle = () => setAssess($("assessPanel").style.display === "none");
+  $("assessToggle").addEventListener("click", toggle);
+  $("assessToggle").addEventListener("keydown", e => { if (e.key==="Enter"||e.key===" ") { e.preventDefault(); toggle(); } });
+  document.querySelectorAll('a[href="#assess"]').forEach(a => a.addEventListener("click", () => setAssess(true)));
+
+  function buildSummary() {
+    const answers = QS.map(q => `${q.t}: ${q.o ? SC[q.o][+$("q_"+q.id).value][0] : $("q_"+q.id).value}`);
+    return [...answers,"",
+      `Ease of implementation: ${$("effortPct").textContent} (${$("effortTag").textContent})`,`Benefit: ${$("benefitPct").textContent} (${$("benefitTag").textContent})`,`Hours freed/year: ${$("hours").textContent}`,$("verdictBox").innerText].join("\n");
+  }
+  $("resultsBtn").addEventListener("click", () => {
+    const proc = $("c_proc").value.trim();
+    if (!proc) { $("resMsg").textContent = "Please enter the process name first."; $("c_proc").focus(); return; }
+    $("resMsg").textContent = "";
+    calc();
+    $("resProc").textContent = proc;
+    $("askBtns").style.display = "block"; $("noMsg").style.display = "none";
+    const b = $("resultsBox"); b.style.display = "block"; b.scrollIntoView({behavior:"smooth", block:"start"});
+  });
+  $("yesBtn").addEventListener("click", () => window.open("https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=E0iiAg1kzUa1g5SfBBNysOyYEbGOhHpDtVrcLVqISQlUQlBHVjRRRjkwSEFETzdHUkpYQlo1QUFHQy4u", "_blank", "noopener"));
+  $("noBtn").addEventListener("click", () => { $("askBtns").style.display = "none"; $("noMsg").style.display = "block"; });
+</script>
+</body>
+</html>
